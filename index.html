@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ángulo90 | Alquimia Audiovisual</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --primary-neon: #00f0ff;
+            --secondary-neon: #7000ff;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --panel-bg: #0a0a0a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* Nav */
+        nav { display: flex; justify-content: space-between; padding: 20px 50px; background: rgba(5, 5, 5, 0.9); position: fixed; width: 100%; z-index: 1000; border-bottom: 1px solid rgba(0, 240, 255, 0.2); backdrop-filter: blur(10px); }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 2px; background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-links a { color: var(--text-main); text-decoration: none; margin-left: 30px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s, text-shadow 0.3s; }
+        .nav-links a:hover { color: var(--primary-neon); text-shadow: 0 0 10px var(--primary-neon); }
+
+        /* Hero */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #1a1a2e 0%, var(--bg-color) 70%); }
+        .hero h1 { font-size: 4rem; font-weight: 900; margin-bottom: 20px; text-transform: uppercase; }
+        .typing-text { color: var(--primary-neon); border-right: 2px solid var(--primary-neon); padding-right: 5px; animation: blink 0.75s step-end infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .hero p { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; margin-bottom: 40px; line-height: 1.6; }
+        
+        .btn-neon { padding: 15px 40px; background: transparent; color: var(--primary-neon); border: 1px solid var(--primary-neon); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 15px rgba(0, 240, 255, 0.2) inset; text-decoration: none; display: inline-block; }
+        .btn-neon:hover { background: var(--primary-neon); color: var(--bg-color); box-shadow: 0 0 20px var(--primary-neon), 0 0 40px var(--primary-neon); }
+
+        /* Servicios */
+        .services { padding: 100px 50px; text-align: center; }
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; color: var(--secondary-neon); text-transform: uppercase; letter-spacing: 2px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .card { background: var(--panel-bg); border: 1px solid rgba(112, 0, 255, 0.3); padding: 40px; border-radius: 5px; transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-10px); border-color: var(--secondary-neon); box-shadow: 0 10px 30px rgba(112, 0, 255, 0.2); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--primary-neon); }
+
+        /* LABORATORIO INTERACTIVO (NUEVO) */
+        .lab-section { padding: 100px 50px; background: #080808; border-top: 1px solid rgba(0, 240, 255, 0.1); border-bottom: 1px solid rgba(0, 240, 255, 0.1); text-align: center; }
+        .lab-container { max-width: 900px; margin: 40px auto; background: var(--panel-bg); padding: 40px; border-radius: 10px; border: 1px solid rgba(0, 240, 255, 0.3); box-shadow: 0 0 30px rgba(0, 240, 255, 0.05); }
+        .lab-step { margin-bottom: 30px; text-align: left; }
+        .lab-step h4 { color: var(--text-main); margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .lab-step h4::before { content: "►"; color: var(--primary-neon); font-size: 0.8rem; }
+        .options-grid { display: flex; gap: 15px; flex-wrap: wrap; }
+        .option-btn { flex: 1; min-width: 150px; padding: 15px; background: transparent; border: 1px solid var(--text-muted); color: var(--text-muted); border-radius: 5px; cursor: pointer; transition: all 0.3s; font-size: 1rem; font-weight: bold; }
+        .option-btn.active { background: rgba(0, 240, 255, 0.1); border-color: var(--primary-neon); color: var(--primary-neon); box-shadow: 0 0 15px rgba(0, 240, 255, 0.2); }
+        .option-btn:hover:not(.active) { border-color: #fff; color: #fff; }
+        
+        .total-display { margin-top: 40px; padding: 30px; background: linear-gradient(145deg, #050505, #111); border: 2px solid var(--secondary-neon); border-radius: 10px; text-align: center; }
+        .total-display h3 { color: var(--text-muted); font-size: 1rem; text-transform: uppercase; letter-spacing: 2px; }
+        .total-amount { font-size: 3.5rem; font-weight: 900; color: var(--secondary-neon); text-shadow: 0 0 20px rgba(112, 0, 255, 0.5); margin: 10px 0 20px 0; }
+        
+        .whatsapp-btn { background: #25D366; color: #000; border: none; padding: 15px 40px; font-size: 1.1rem; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 5px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+        .whatsapp-btn:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(37, 211, 102, 0.5); }
+
+        /* Contacto */
+        .contacto { background: var(--panel-bg); padding: 80px 50px; text-align: center; }
+        .contact-info { display: flex; justify-content: center; gap: 50px; margin-top: 40px; color: var(--text-muted); flex-wrap: wrap; }
+        .contact-item { display: flex; flex-direction: column; align-items: center; }
+        .contact-item span { color: var(--primary-neon); font-weight: bold; margin-bottom: 5px; }
+
+        footer { text-align: center; padding: 20px; background: var(--bg-color); color: var(--text-muted); font-size: 0.8rem; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; align-items: center; gap: 15px; }
+            .nav-links a { margin: 0 10px; }
+            .hero h1 { font-size: 2.5rem; }
+            .options-grid { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">ÁNGULO90</div>
+        <div class="nav-links">
+            <a href="#inicio">Inicio</a>
+            <a href="#servicios">Módulos</a>
+            <a href="#laboratorio">Laboratorio</a>
+            <a href="#contacto">Enlace Neural</a>
+        </div>
+    </nav>
+
+    <section id="inicio" class="hero">
+        <h1>Fabricamos mensajes con<br><span class="typing-text">conexión audiovisual</span></h1>
+        <p>Creamos la comunicación que no existe. Desde el spot que da inicio a una campaña, hasta el mensaje estratégico de último minuto, somos el equipo que lidera la innovación visual.</p>
+        <a href="#laboratorio" class="btn-neon">Iniciar Alquimia Visual</a>
+    </section>
+
+    <section id="servicios" class="services">
+        <h2 class="section-title">Módulos de Solución Audiovisual</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>01. Campañas / Spots</h3>
+                <p>Activadores visuales diseñados para inmersión profunda. Damos inicio a tu campaña con estímulos que tu audiencia no podrá ignorar.</p>
+            </div>
+            <div class="card">
+                <h3>02. Cinematografía Corporativa</h3>
+                <p>Presenta tu empresa como el gigante de la industria que es. Calidad técnica y narrativa que construye confianza absoluta.</p>
+            </div>
+            <div class="card">
+                <h3>03. Respuesta de Último Minuto</h3>
+                <p>Agilidad táctica. Somos el equipo que siempre responde con soluciones de alta gama bajo presión de tiempo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUEVO: LABORATORIO INTERACTIVO -->
+    <section id="laboratorio" class="lab-section">
+        <h2 class="section-title">Laboratorio de Presupuesto</h2>
+        <p style="color: var(--text-muted); margin-bottom: 20px;">Configura tu estímulo audiovisual y calcula la inversión estimada en tiempo real.</p>
+        
+        <div class="lab-container">
+            <div class="lab-step">
+                <h4>1. Selecciona el Módulo (Tipo de Proyecto)</h4>
+                <div class="options-grid" id="opt-tipo">
+                    <button class="option-btn active" data-val="15000" data-name="Spot Publicitario">Spot / Campaña</button>
+                    <button class="option-btn" data-val="25000" data-name="Video Corporativo">Video Corporativo</button>
+                    <button class="option-btn" data-val="10000" data-name="Cobertura de Evento">Cobertura Dinámica</button>
+                </div>
+            </div>
+
+            <div class="lab-step">
+                <h4>2. Duración de la Inmersión</h4>
+                <div class="options-grid" id="opt-duracion">
+                    <button class="option-btn active" data-multi="1" data-name="Impacto Corto (Hasta 60s)">Impacto Corto (< 60s)</button>
+                    <button class="option-btn" data-multi="1.5" data-name="Narrativa Media (1-3 min)">Narrativa Media (1-3 min)</button>
+                    <button class="option-btn" data-multi="2" data-name="Documental (> 3 min)">Profundidad (> 3 min)</button>
+                </div>
+            </div>
+
+            <div class="lab-step">
+                <h4>3. Velocidad de Procesamiento (Entrega)</h4>
+                <div class="options-grid" id="opt-entrega">
+                    <button class="option-btn active" data-extra="0" data-name="Estándar (1-2 Semanas)">Estándar</button>
+                    <button class="option-btn" data-extra="5000" data-name="Respuesta de Último Minuto (Express)">Último Minuto (Express)</button>
+                </div>
+            </div>
+
+            <div class="total-display">
+                <h3>Inversión Proyectada (MXN)</h3>
+                <div class="total-amount" id="precio-total">$15,000</div>
+                <p style="color: #666; font-size: 0.8rem; margin-bottom: 20px;">*Estimación base. Sujeta a guion y requerimientos específicos.</p>
+                <a href="#" id="btn-enviar-wa" target="_blank" class="whatsapp-btn">
+                    Enviar Configuración por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacto" class="contacto">
+        <h2 class="section-title">Centro de Mando y Enlace</h2>
+        <div class="contact-info">
+            <div class="contact-item">
+                <span>COORDENADAS</span>
+                <p>Calle 23 No. 47 entre 10 Y 12,<br>Residencial de Arco, Mérida, Yucatán</p>
+            </div>
+            <div class="contact-item">
+                <span>ENLACE COMUNICACIONAL</span>
+                <p>Tel: 9999 30 71 47<br>WhatsApp: 999 740 5825</p>
+            </div>
+            <div class="contact-item">
+                <span>RED DE DATOS</span>
+                <p>ventas@angulo90.com</p>
+            </div>
+        </div>
+        <br><br>
+        <p style="color:var(--text-muted); font-size: 0.9rem;">Políticas de privacidad y confidencialidad de datos activas.</p>
+    </section>
+
+    <footer>
+        <p>© 2026 Ángulo90 Producciones Audiovisuales - Derechos Reservados.</p>
+    </footer>
+
+    <script>
+        // Lógica del Texto Animado (Hero)
+        const texts = ["conexión audiovisual", "impacto inmersivo", "alquimia digital"];
+        let count = 0, index = 0, currentText = "", letter = "", isDeleting = false;
+
+        (function type() {
+            if (count === texts.length) count = 0;
+            currentText = texts[count];
+            letter = isDeleting ? currentText.slice(0, --index) : currentText.slice(0, ++index);
+            document.querySelector('.typing-text').textContent = letter;
+
+            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && letter.length === currentText.length) { typeSpeed = 2000; isDeleting = true; }
+            else if (isDeleting && letter.length === 0) { isDeleting = false; count++; typeSpeed = 500; }
+            setTimeout(type, typeSpeed);
+        }());
+
+        // Lógica del Laboratorio de Presupuesto
+        const opciones = document.querySelectorAll('.option-btn');
+        let tipoBase = 15000;
+        let multiDuracion = 1;
+        let extraEntrega = 0;
+
+        let nombreTipo = "Spot / Campaña";
+        let nombreDuracion = "Impacto Corto (< 60s)";
+        let nombreEntrega = "Estándar";
+
+        function calcularTotal() {
+            const total = (tipoBase * multiDuracion) + extraEntrega;
+            document.getElementById('precio-total').innerText = '$' + total.toLocaleString('es-MX');
+            actualizarEnlaceWhatsApp(total);
+        }
+
+        function actualizarEnlaceWhatsApp(total) {
+            const numeroWA = "529997405825"; // Número oficial de Ángulo90
+            const mensaje = `¡Hola Ángulo90! He utilizado su Laboratorio de Presupuesto y me gustaría concretar una alquimia audiovisual con los siguientes parámetros:%0A%0A`
+                          + `🎬 *Módulo:* ${nombreTipo}%0A`
+                          + `⏱️ *Duración:* ${nombreDuracion}%0A`
+                          + `⚡ *Entrega:* ${nombreEntrega}%0A%0A`
+                          + `💰 *Inversión estimada:* $${total.toLocaleString('es-MX')} MXN%0A%0A`
+                          + `¿Podemos agendar una reunión para afinar detalles?`;
+            
+            document.getElementById('btn-enviar-wa').href = `https://wa.me/${numeroWA}?text=${mensaje}`;
+        }
+
+        opciones.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remover clase active de los hermanos
+                const parent = this.parentElement;
+                parent.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Actualizar variables según el contenedor
+                if(parent.id === 'opt-tipo') {
+                    tipoBase = parseFloat(this.getAttribute('data-val'));
+                    nombreTipo = this.getAttribute('data-name');
+                } else if(parent.id === 'opt-duracion') {
+                    multiDuracion = parseFloat(this.getAttribute('data-multi'));
+                    nombreDuracion = this.getAttribute('data-name');
+                } else if(parent.id === 'opt-entrega') {
+                    extraEntrega = parseFloat(this.getAttribute('data-extra'));
+                    nombreEntrega = this.getAttribute('data-name');
+                }
+
+                calcularTotal();
+            });
+        });
+
+        // Inicializar
+        calcularTotal();
+    </script>
+</body>
+</html>
