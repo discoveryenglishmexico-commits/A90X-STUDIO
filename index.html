@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ángulo90 | Alquimia Audiovisual Premium</title>
+    <title>A90X STUDIO | Alquimia Audiovisual Premium</title>
     <!-- Fuentes Sci-Fi e Inter corporativo -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-dark: #020204;
-            --bg-panel: rgba(10, 10, 15, 0.7);
+            --bg-panel: rgba(10, 10, 15, 0.75);
             --primary-neon: #00f0ff;
             --secondary-neon: #7000ff;
             --accent-pink: #ff007f;
@@ -27,7 +27,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Barra de navegación de cristal */
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -49,12 +48,30 @@
             background: var(--primary-neon);
         }
 
-        /* Nav Glassmorphism */
+        /* TRANSICIONES ELEGANTES DE DESPLAZAMIENTO (SCROLL REVEAL) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, opacity;
+        }
+
+        .reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Retardos de revelado para elementos en cuadrícula */
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+
+        /* Nav Glassmorphism - Rediseñado para evitar colisiones en móvil */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 50px;
+            padding: 20px 50px;
             background: rgba(2, 2, 4, 0.85);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(20px);
@@ -62,6 +79,7 @@
             position: fixed;
             width: 100%;
             z-index: 1000;
+            transition: all 0.3s ease;
         }
 
         .logo {
@@ -73,6 +91,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
         }
 
         .nav-links a {
@@ -84,11 +108,27 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-neon);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             color: var(--primary-neon);
             text-shadow: 0 0 8px var(--primary-neon);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         /* Hero inmersivo de Hollywood */
@@ -101,17 +141,21 @@
             text-align: center;
             background: radial-gradient(circle at center, #11092a 0%, var(--bg-dark) 80%);
             position: relative;
-            padding: 0 20px;
+            padding: 0 24px;
+            overflow: hidden;
         }
 
         .hero h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 4.5rem;
+            font-size: calc(2.2rem + 2vw);
             font-weight: 900;
-            line-height: 1.1;
+            line-height: 1.2;
             letter-spacing: -1px;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-transform: uppercase;
+            max-width: 1100px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .typing-text {
@@ -119,16 +163,17 @@
             border-right: 3px solid var(--primary-neon);
             padding-right: 8px;
             animation: blink 0.75s step-end infinite;
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
         }
 
         @keyframes blink { 50% { border-color: transparent; } }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: calc(0.95rem + 0.3vw);
             color: var(--text-muted);
-            max-width: 700px;
-            margin-bottom: 40px;
-            line-height: 1.7;
+            max-width: 750px;
+            margin-bottom: 45px;
+            line-height: 1.8;
         }
 
         /* Botón de Neón Líquido */
@@ -138,7 +183,7 @@
             color: var(--text-main);
             border: 1px solid rgba(255, 255, 255, 0.2);
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 3px;
@@ -146,7 +191,7 @@
             position: relative;
             overflow: hidden;
             border-radius: 4px;
-            transition: all 0.4s;
+            transition: all 0.4s ease;
             text-decoration: none;
             display: inline-block;
         }
@@ -168,11 +213,51 @@
             border-color: var(--primary-neon);
             box-shadow: 0 0 25px rgba(0, 240, 255, 0.6);
             text-shadow: 0 0 5px #fff;
+            transform: translateY(-2px);
         }
 
-        /* MÓDULOS DE SERVICIOS (ROBUSTEZ ESTILO ECUC/VIDAL) */
+        /* TRAYECTORIA Y MÉTRICAS */
+        .metrics-section {
+            padding: 80px 24px;
+            background: radial-gradient(circle at center, #0a0518 0%, var(--bg-dark) 80%);
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .metrics-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .metric-card {
+            padding: 20px;
+        }
+
+        .metric-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: calc(2.5rem + 1vw);
+            font-weight: 900;
+            background: var(--gradient-neon);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(112, 0, 255, 0.2);
+        }
+
+        .metric-card p {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        /* MÓDULOS DE SERVICIOS */
         .services-section {
-            padding: 120px 50px;
+            padding: 120px 24px;
             max-width: 1300px;
             margin: 0 auto;
         }
@@ -180,48 +265,53 @@
         .section-header {
             text-align: center;
             margin-bottom: 80px;
+            padding: 0 10px;
         }
 
         .section-header h2 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
+            font-size: calc(2rem + 1.2vw);
             font-weight: 900;
             background: linear-gradient(90deg, var(--primary-neon), var(--secondary-neon));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            line-height: 1.3;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         .section-header p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            max-width: 600px;
+            font-size: calc(0.9rem + 0.15vw);
+            max-width: 650px;
             margin: 0 auto;
+            line-height: 1.7;
         }
 
-        /* Estructura ordenada de servicios (2 Grandes Categorías) */
+        /* Estructura ordenada de servicios */
         .services-category-title {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--accent-pink);
-            margin: 40px 0 20px 0;
+            margin: 50px 0 25px 0;
             border-left: 4px solid var(--accent-pink);
             padding-left: 15px;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
             margin-bottom: 60px;
         }
 
-        /* Tarjeta de Liquid Glass */
+        /* Tarjeta de Liquid Glass (Glassmorphism de alta gama) */
         .glass-card {
             background: var(--bg-panel);
             backdrop-filter: blur(16px) saturate(180%);
@@ -229,16 +319,19 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px;
             padding: 40px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .glass-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 4px;
+            width: 100%; height: 3px;
             background: linear-gradient(90deg, transparent, var(--primary-neon), transparent);
             opacity: 0;
             transition: opacity 0.3s;
@@ -246,62 +339,67 @@
 
         .glass-card:hover {
             transform: translateY(-8px);
-            border-color: rgba(0, 240, 255, 0.3);
-            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.1);
+            border-color: rgba(0, 240, 255, 0.25);
+            box-shadow: 0 15px 35px rgba(0, 240, 255, 0.08);
         }
 
         .glass-card:hover::before {
             opacity: 1;
         }
 
-        .glass-card h3 {
+        .glass-card-top h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--primary-neon);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
 
         .glass-card .service-num {
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.15);
             font-family: 'Orbitron', sans-serif;
         }
 
         .glass-card p {
             color: var(--text-muted);
-            line-height: 1.6;
+            line-height: 1.7;
             font-size: 0.95rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .glass-card .features-list {
             list-style: none;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 15px;
+            padding-top: 20px;
+            margin-top: auto;
         }
 
         .glass-card .features-list li {
             font-size: 0.85rem;
             color: var(--text-main);
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 10px;
+            line-height: 1.4;
         }
 
         .glass-card .features-list li::before {
             content: "•";
             color: var(--accent-pink);
             font-weight: bold;
+            font-size: 1.2rem;
+            line-height: 0.8;
         }
 
-        /* PROPUESTA DE VALOR CIENTÍFICA (ESTILO VIDAL) */
+        /* PROPUESTA DE VALOR CIENTÍFICA (ESTILO VIDAL/ECUC) */
         .value-section {
             background: #050508;
-            padding: 100px 50px;
+            padding: 120px 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -316,66 +414,29 @@
 
         .value-item h4 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
             color: var(--primary-neon);
             margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         .value-item h4 span {
-            color: rgba(255, 255, 255, 0.1);
-            font-size: 2rem;
+            color: rgba(255, 255, 255, 0.08);
+            font-size: 2.2rem;
+            font-weight: 900;
         }
 
         .value-item p {
             color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* TRAYECTORIA Y MÉTRICAS (ESTILO ECUC/VIDAL) */
-        .metrics-section {
-            padding: 80px 50px;
-            background: radial-gradient(circle at center, #0a0518 0%, var(--bg-dark) 80%);
-            text-align: center;
-        }
-
-        .metrics-container {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .metric-card {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        .metric-card h3 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: var(--gradient-neon);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 5px;
-        }
-
-        .metric-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        /* SIMULADOR DE SET "CINE-DIRECT AR" (GAMIFICACIÓN HOLLYWOOD) */
+        /* CONSOLA INTERACTIVA CINE-DIRECT AR */
         .lab-section {
-            padding: 120px 50px;
+            padding: 120px 24px;
             text-align: center;
         }
 
@@ -386,7 +447,8 @@
             position: relative;
             background: #040407;
             border-radius: 16px;
-            padding: 3px; /* Espacio para el borde gradiente */
+            padding: 3px;
+            z-index: 1;
         }
 
         /* Borde gradiente multicolor animado */
@@ -399,8 +461,8 @@
             z-index: -1;
             border-radius: 16px;
             animation: borderPulse 12s ease infinite;
-            filter: blur(10px);
-            opacity: 0.6;
+            filter: blur(8px);
+            opacity: 0.7;
         }
 
         @keyframes borderPulse {
@@ -414,18 +476,20 @@
             border-radius: 14px;
             padding: 50px 40px;
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1.1fr 1fr;
             gap: 40px;
             text-align: left;
         }
 
         .lab-setup h3 {
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #fff;
             margin-bottom: 30px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .control-group {
@@ -434,10 +498,10 @@
 
         .control-group label {
             font-family: 'Orbitron', sans-serif;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             margin-bottom: 15px;
             display: flex;
             align-items: center;
@@ -462,35 +526,42 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--text-muted);
-            padding: 12px;
-            font-size: 0.85rem;
+            padding: 12px 15px;
+            font-size: 0.8rem;
             font-weight: 600;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
         }
 
         .setup-btn.active {
             background: rgba(0, 240, 255, 0.1);
             border-color: var(--primary-neon);
             color: var(--primary-neon);
-            box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
             text-shadow: 0 0 5px rgba(0, 240, 255, 0.5);
         }
 
-        /* Monitor de Set (Visor Virtual) */
+        /* MONITOR VIRTUAL DE HOLLYWOOD (ARQUITECTURA FIJA SIN COLISIONES) */
+        .preview-monitor-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+        }
+
         .preview-monitor {
             background: #010103;
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 10px;
             position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
             overflow: hidden;
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.9);
-            height: 100%;
-            min-height: 400px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.95);
+            aspect-ratio: 16 / 10;
+            width: 100%;
             transition: all 0.5s ease;
         }
 
@@ -498,8 +569,8 @@
         .camera-grid-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            border-top: 1px dashed rgba(255, 255, 255, 0.05);
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.05);
+            border-top: 1px dashed rgba(255, 255, 255, 0.04);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.04);
             pointer-events: none;
             z-index: 2;
         }
@@ -507,17 +578,17 @@
             content: '';
             position: absolute;
             top: 0; left: 33.33%; width: 33.33%; height: 100%;
-            border-left: 1px dashed rgba(255, 255, 255, 0.05);
-            border-right: 1px dashed rgba(255, 255, 255, 0.05);
+            border-left: 1px dashed rgba(255, 255, 255, 0.04);
+            border-right: 1px dashed rgba(255, 255, 255, 0.04);
         }
 
         /* Barras de Aspecto Cinematográfico */
         .cinematic-bars {
             position: absolute;
-            left: 0; width: 100%; height: 0;
+            left: 0; width: 100%; height: 40px;
             background: #000;
             z-index: 5;
-            transition: height 0.5s ease;
+            transition: height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .bar-top { top: 0; }
         .bar-bottom { bottom: 0; }
@@ -535,46 +606,13 @@
         .bottom-left { bottom: 15px; left: 15px; border-right: none; border-top: none; }
         .bottom-right { bottom: 15px; right: 15px; border-left: none; border-top: none; }
 
-        /* Indicador LED REC */
-        .rec-indicator {
-            position: absolute;
-            top: 20px; right: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #ff0055;
-            z-index: 6;
-        }
-        .rec-dot {
-            width: 8px; height: 8px;
-            background: #ff0055;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #ff0055;
-            animation: recBlink 1s infinite;
-        }
-        @keyframes recBlink { 50% { opacity: 0.1; } }
-
         /* Simulación de Luces del Set */
         .set-lighting-simulation {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.1) 0%, rgba(0,0,0,0.8) 100%);
+            background: radial-gradient(circle at 50% 30%, rgba(255, 0, 127, 0.25) 0%, rgba(0, 240, 255, 0.2) 50%, rgba(0,0,0,0.9) 100%);
             z-index: 1;
             transition: background 0.8s ease;
-        }
-
-        /* Contenedor del Título del Monitor */
-        .monitor-specs {
-            padding: 20px;
-            z-index: 6;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.7rem;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 1px;
-            line-height: 1.6;
         }
 
         .monitor-center-aim {
@@ -587,13 +625,66 @@
             z-index: 4;
         }
 
-        /* Mecánica Gamificada de Calibración */
-        .calibration-box {
-            padding: 25px;
+        /* Capa HUD del Monitor - Rediseñada para evitar colisión */
+        .monitor-hud-top {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             z-index: 6;
-            background: rgba(5, 5, 10, 0.9);
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(5px);
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 1px;
+        }
+
+        .rec-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ff0055;
+            font-weight: 700;
+        }
+        .rec-dot {
+            width: 8px; height: 8px;
+            background: #ff0055;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff0055;
+            animation: recBlink 1s infinite;
+        }
+        @keyframes recBlink { 50% { opacity: 0.2; } }
+
+        .monitor-hud-bottom {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            z-index: 6;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.4);
+            letter-spacing: 1px;
+            line-height: 1.5;
+            pointer-events: none;
+        }
+
+        .hud-row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2px;
+        }
+
+        /* Consola / Tablero de Mandos del Director */
+        .calibration-box {
+            background: rgba(10, 10, 15, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 24px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
         }
 
         .progress-container {
@@ -615,9 +706,11 @@
         .calibration-status {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
         /* Botón de Calibración de Set */
@@ -635,6 +728,7 @@
             cursor: pointer;
             transition: all 0.3s;
             box-shadow: 0 0 10px rgba(255, 0, 127, 0.1) inset;
+            font-size: 0.8rem;
         }
 
         .btn-calibrate:hover {
@@ -650,7 +744,7 @@
             border: 1px solid var(--led-green);
             padding: 25px;
             border-radius: 8px;
-            margin-top: 25px;
+            margin-top: 10px;
             animation: fadeIn 0.6s ease forwards;
         }
 
@@ -688,6 +782,8 @@
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.85rem;
         }
 
         .whatsapp-export-btn:hover {
@@ -698,16 +794,15 @@
         /* SECCIÓN CONTACTO / ENLACE NEURAL */
         .contacto-section {
             background: #050508;
-            padding: 100px 50px;
+            padding: 120px 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             text-align: center;
         }
 
         .contact-grid {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
             max-width: 1200px;
             margin: 50px auto;
         }
@@ -715,10 +810,13 @@
         .contact-card {
             background: var(--bg-panel);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 30px;
+            padding: 40px 30px;
             border-radius: 8px;
-            min-width: 280px;
-            flex: 1;
+            transition: border-color 0.3s;
+        }
+
+        .contact-card:hover {
+            border-color: rgba(0, 240, 255, 0.2);
         }
 
         .contact-card h5 {
@@ -726,13 +824,26 @@
             font-size: 0.9rem;
             color: var(--primary-neon);
             letter-spacing: 2px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
         }
 
         .contact-card p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.6;
+            line-height: 1.7;
+        }
+
+        .contact-card a {
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-card a:hover {
+            color: var(--primary-neon);
+            text-shadow: 0 0 5px rgba(0, 240, 255, 0.3);
         }
 
         /* Footer */
@@ -740,7 +851,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             padding: 30px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.25);
             font-size: 0.8rem;
             background: var(--bg-dark);
         }
@@ -750,18 +861,138 @@
             text-decoration: none;
         }
 
+        /* MEDIA QUERIES - MÓVIL EXTREMO Y OPTIMIZACIÓN RESPONSIVA */
         @media (max-width: 900px) {
-            nav { padding: 15px 20px; }
-            .hero h1 { font-size: 2.8rem; }
-            .lab-content { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
+            nav {
+                padding: 15px 24px;
+            }
+
+            .lab-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 30px 20px;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Menú colapsado a columna */
+            nav {
+                flex-direction: column;
+                gap: 12px;
+                padding: 15px 12px;
+                text-align: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 10px 15px;
+            }
+
+            .nav-links a {
+                margin-left: 0;
+                font-size: 0.75rem;
+                letter-spacing: 1px;
+            }
+
+            .logo {
+                font-size: 1.3rem;
+            }
+
+            /* Reducción de márgenes y paddings generales de sección */
+            .hero {
+                padding: 0 16px;
+            }
+
+            .services-section, .value-section, .lab-section, .contacto-section {
+                padding: 70px 16px;
+            }
+
+            .section-header {
+                margin-bottom: 50px;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem !important;
+                line-height: 1.3;
+            }
+
+            .hero h1 {
+                font-size: 2rem !important;
+                line-height: 1.25;
+            }
+
+            .glass-card {
+                padding: 25px 20px;
+            }
+
+            .lab-container, .lab-content {
+                padding: 24px 16px;
+            }
+
+            .preview-monitor {
+                aspect-ratio: 4 / 3; /* Más amigable con layouts móviles verticales */
+            }
+
+            .btn-group {
+                gap: 8px;
+            }
+
+            .setup-btn {
+                min-width: 100px;
+                padding: 10px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.7rem !important;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 30px;
+            }
+
+            .btn-premium {
+                padding: 15px 30px;
+                font-size: 0.75rem;
+                letter-spacing: 2px;
+            }
+
+            .section-header h2 {
+                font-size: 1.6rem !important;
+            }
+
+            .metric-card h3 {
+                font-size: 2.3rem;
+            }
+
+            .services-category-title {
+                font-size: 1.1rem;
+                letter-spacing: 1.5px;
+            }
+
+            .preview-monitor {
+                aspect-ratio: 1.2 / 1; /* Monitor adaptado a pantallas ultra estrechas */
+            }
+
+            .monitor-hud-top, .monitor-hud-bottom {
+                font-size: 0.55rem;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Menú de Navegación -->
     <nav>
-        <div class="logo">ÁNGULO90</div>
+        <a href="#inicio" class="logo">A90X STUDIO</a>
         <div class="nav-links">
             <a href="#inicio">Inicio</a>
             <a href="#módulos">Módulos</a>
@@ -771,65 +1002,71 @@
         </div>
     </nav>
 
-    <!-- Héroe con Estética Holográfica -->
+    <!-- Sección Hero -->
     <section id="inicio" class="hero">
         <h1>Fabricamos mensajes con<br><span class="typing-text">conexión audiovisual</span></h1>
         <p>Creamos la comunicación que no existe. Liderando la innovación visual por más de 20 años mediante un enfoque técnico impecable de nivel cinematográfico.</p>
         <a href="#simulador" class="btn-premium">Acceder al Set Virtual</a>
     </section>
 
-    <!-- Indicadores de Trayectoria Estilo ECUC -->
+    <!-- Métricas con Revelación Elegante -->
     <section class="metrics-section">
         <div class="metrics-container">
-            <div class="metric-card">
+            <div class="metric-card reveal delay-1">
                 <h3>+20</h3>
                 <p>Años en el Sector</p>
             </div>
-            <div class="metric-card">
+            <div class="metric-card reveal delay-2">
                 <h3>+500</h3>
                 <p>Campañas Producidas</p>
             </div>
-            <div class="metric-card">
+            <div class="metric-card reveal delay-3">
                 <h3>+1,200</h3>
                 <p>Cortes de Video</p>
             </div>
-            <div class="metric-card">
+            <div class="metric-card reveal delay-1">
                 <h3>100%</h3>
-                <p>Confidencialidad de Datos</p>
+                <p>Confidencialidad</p>
             </div>
         </div>
     </section>
 
-    <!-- Servicios Ordenados de Alta Gama (Inspirado en Escuela Culinaria y VIDAL) -->
+    <!-- Servicios Organizados de Alta Gama -->
     <section id="módulos" class="services-section">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Módulos de Alquimia Digital</h2>
             <p>Estructurados con el máximo rigor operativo para satisfacer los objetivos comerciales y de prestigio de marcas líderes.</p>
         </div>
 
-        <div class="services-category-title">01. Línea Cinematográfica Principal</div>
+        <div class="services-category-title reveal">01. Línea Cinematográfica Principal</div>
         <div class="services-grid">
-            <div class="glass-card">
-                <h3>Spots & Campañas <span class="service-num">/01</span></h3>
-                <p>Activadores visuales e inmersión comercial de alta repercusión. Diseñados para dar el banderazo de salida de tu campaña corporativa con absoluta potencia.</p>
+            <div class="glass-card reveal delay-1">
+                <div class="glass-card-top">
+                    <h3>Spots & Campañas <span class="service-num">/01</span></h3>
+                    <p>Activadores visuales e inmersión comercial de alta repercusión. Diseñados para dar el banderazo de salida de tu campaña corporativa con absoluta potencia.</p>
+                </div>
                 <ul class="features-list">
                     <li>Fotografía con calidad cinematográfica de Hollywood</li>
                     <li>Guiones optimizados para retención masiva</li>
                     <li>Producción con cámaras de alta gama (RED/ARRI)</li>
                 </ul>
             </div>
-            <div class="glass-card">
-                <h3>Cinematografía Corporativa <span class="service-num">/02</span></h3>
-                <p>Presenta el tamaño y el prestigio real de tu corporativo. Estructuramos la narrativa de tu empresa como líder incuestionable de la industria nacional.</p>
+            <div class="glass-card reveal delay-2">
+                <div class="glass-card-top">
+                    <h3>Cinematografía Corporativa <span class="service-num">/02</span></h3>
+                    <p>Presenta el tamaño y el prestigio real de tu corporativo. Estructuramos la narrativa de tu empresa como líder incuestionable de la industria nacional.</p>
+                </div>
                 <ul class="features-list">
                     <li>Dirección de arte especializada en set</li>
                     <li>Entrevistas ejecutivas con iluminación de estudio</li>
                     <li>Formatos optimizados para juntas globales y web</li>
                 </ul>
             </div>
-            <div class="glass-card">
-                <h3>Respuesta de Último Minuto <span class="service-num">/03</span></h3>
-                <p>Táctica de despliegue rápido. Diseñada para crisis o comunicados urgentes donde la calidad impecable debe entregarse en tiempo récord.</p>
+            <div class="glass-card reveal delay-3">
+                <div class="glass-card-top">
+                    <h3>Respuesta de Último Minuto <span class="service-num">/03</span></h3>
+                    <p>Táctica de despliegue rápido. Diseñada para crisis o comunicados urgentes donde la calidad impecable debe entregarse en tiempo récord.</p>
+                </div>
                 <ul class="features-list">
                     <li>Montaje y entrega express</li>
                     <li>Canales de comunicación encriptados</li>
@@ -838,29 +1075,35 @@
             </div>
         </div>
 
-        <div class="services-category-title">02. Especialidades de Ingeniería Visual</div>
+        <div class="services-category-title reveal">02. Especialidades de Ingeniería Visual</div>
         <div class="services-grid">
-            <div class="glass-card">
-                <h3>Streaming & Multicámara Premium <span class="service-num">/04</span></h3>
-                <p>Transmisiones en vivo de alta gama tecnológica para eventos masivos o corporativos, garantizando fidelidad de audio y redundancia en red.</p>
+            <div class="glass-card reveal delay-1">
+                <div class="glass-card-top">
+                    <h3>Streaming & Multicámara Premium <span class="service-num">/04</span></h3>
+                    <p>Transmisiones en vivo de alta gama tecnológica para eventos masivos o corporativos, garantizando fidelidad de audio y redundancia en red.</p>
+                </div>
                 <ul class="features-list">
                     <li>Mezcla digital multicanal en directo</li>
                     <li>Señal de video ininterrumpida por fibra óptica</li>
                     <li>Gráficos dinámicos interactivos sobre la transmisión</li>
                 </ul>
             </div>
-            <div class="glass-card">
-                <h3>Postproducción de Alquimia <span class="service-num">/05</span></h3>
-                <p>Corrección de color y diseño acústico de precisión milimétrica. Transformamos cada toma mediante calibración cromática y audio Dolby Atmos.</p>
+            <div class="glass-card reveal delay-2">
+                <div class="glass-card-top">
+                    <h3>Postproducción de Alquimia <span class="service-num">/05</span></h3>
+                    <p>Corrección de color y diseño acústico de precisión milimétrica. Transformamos cada toma mediante calibración cromática y audio Dolby Atmos.</p>
+                </div>
                 <ul class="features-list">
                     <li>Corrección de color cinematográfica por hardware (DaVinci Resolve)</li>
                     <li>Diseño sonoro envolvente de grado teatral</li>
                     <li>Incrustación de efectos especiales y VFX</li>
                 </ul>
             </div>
-            <div class="glass-card">
-                <h3>Producción Aérea Dinámica <span class="service-num">/06</span></h3>
-                <p>Perspectivas monumentales. Cámaras voladoras operadas por pilotos certificados para documentar infraestructura y locaciones complejas.</p>
+            <div class="glass-card reveal delay-3">
+                <div class="glass-card-top">
+                    <h3>Producción Aérea Dinámica <span class="service-num">/06</span></h3>
+                    <p>Perspectivas monumentales. Cámaras voladoras operadas por pilotos certificados para documentar infraestructura y locaciones complejas.</p>
+                </div>
                 <ul class="features-list">
                     <li>Aeronaves cinematográficas 4K/8K de última generación</li>
                     <li>Certificaciones oficiales ante las autoridades aeronáuticas</li>
@@ -870,36 +1113,36 @@
         </div>
     </section>
 
-    <!-- Propuesta de Valor Científica Estilo VIDAL -->
+    <!-- Propuesta de Valor -->
     <section id="filosofía" class="value-section">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Nuestra Disciplina Operativa</h2>
             <p>La producción de alta gama exige procesos impecables donde la improvisación y el error no tienen cabida.</p>
         </div>
         <div class="value-grid">
-            <div class="value-item">
+            <div class="value-item reveal delay-1">
                 <h4><span>01</span> Rigor Técnico</h4>
                 <p>Al igual que la química en la alta repostería, un set de cine se rige por leyes exactas de física de la luz y acústica. Planificamos cada segundo con precisión.</p>
             </div>
-            <div class="value-item">
+            <div class="value-item reveal delay-2">
                 <h4><span>02</span> Resiliencia en Rodaje</h4>
                 <p>El clima cambia y las circunstancias varían en campo, pero nuestra capacidad de resolver desbalances ópticos o técnicos en tiempo real asegura la viabilidad del proyecto.</p>
             </div>
-            <div class="value-item">
+            <div class="value-item reveal delay-3">
                 <h4><span>03</span> Soberanía Mensajística</h4>
                 <p>No replicamos modas ni usamos plantillas baratas. Creamos el mensaje y el ecosistema visual exclusivo que tu marca necesita para imponer su soberanía.</p>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN INTERACTIVA GAMIFICADA (ESTILO SIMULADOR DE COCINA ESPEJO DE ECUC) -->
+    <!-- SECCIÓN INTERACTIVA GAMIFICADA (Set AR) -->
     <section id="simulador" class="lab-section">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Consola Interactiva Cine-Direct AR</h2>
             <p>Siente el poder del control cinematográfico. Diseña tu set de rodaje, calibra los parámetros de la cámara de Hollywood y genera tu informe de producción digital.</p>
         </div>
 
-        <div class="lab-glow-container">
+        <div class="lab-glow-container reveal">
             <div class="lab-content">
                 <!-- PANEL DE CONTROLES -->
                 <div class="lab-setup">
@@ -932,8 +1175,8 @@
                     </div>
                 </div>
 
-                <!-- MONITOR VIRTUAL DE HOLLYWOOD -->
-                <div style="display: flex; flex-direction: column;">
+                <!-- MONITOR VIRTUAL DE HOLLYWOOD (ARQUITECTURA FIJA SIN COLISIONES) -->
+                <div class="preview-monitor-wrapper">
                     <div class="preview-monitor" id="monitor">
                         <!-- Capas de simulación -->
                         <div class="set-lighting-simulation" id="light-sim"></div>
@@ -947,46 +1190,52 @@
                         <div class="viewfinder-corner bottom-left"></div>
                         <div class="viewfinder-corner bottom-right"></div>
 
-                        <!-- Indicadores HUD -->
-                        <div class="rec-indicator">
-                            <div class="rec-dot"></div>
-                            <span>REC [4K RED]</span>
-                        </div>
-
                         <div class="monitor-center-aim"></div>
 
-                        <!-- Datos variables en tiempo real -->
-                        <div class="monitor-specs">
-                            <div>CAMERA: RED V-RAPTOR XL</div>
-                            <div id="hud-lights">LIGHTS: CYBER-NOIR RGB ACTIVE</div>
-                            <div id="hud-lens">LENS: ANAMORPHIC 35MM (2.39:1)</div>
-                            <div id="hud-lut">LUT: HOLLYWOOD TEAL & ORANGE</div>
-                            <div id="hud-signal" style="color: var(--led-green); margin-top: 5px;">SIGNAL: STANDBY</div>
+                        <!-- CAPA HUD INDEPENDIENTE SUPERIOR -->
+                        <div class="monitor-hud-top">
+                            <span>CAM: RED V-RAPTOR XL</span>
+                            <div class="rec-indicator">
+                                <div class="rec-dot"></div>
+                                <span>REC 4K</span>
+                            </div>
                         </div>
 
-                        <!-- Botonera de juego de Ritmo / Calibración -->
-                        <div class="calibration-box">
-                            <div class="calibration-status">
-                                <span id="calib-text">OBTURADOR DESALINEADO</span>
-                                <span id="calib-percent">0% FPS</span>
+                        <!-- CAPA HUD INDEPENDIENTE INFERIOR -->
+                        <div class="monitor-hud-bottom">
+                            <div class="hud-row">
+                                <span id="hud-lights">SYS: COLD ACTIVE</span>
+                                <span id="hud-signal" style="color: var(--led-green);">SIGNAL: STANDBY</span>
                             </div>
-                            <div class="progress-container">
-                                <div class="progress-bar" id="p-bar"></div>
+                            <div class="hud-row">
+                                <span id="hud-lens">LENS: ANAMORPHIC 35MM</span>
+                                <span id="hud-lut">LUT: TEAL & ORANGE</span>
                             </div>
-                            <button class="btn-calibrate" id="btn-calc" onclick="calibrateClick()">
-                                Presionar para Calibrar FPS (Estabilizar)
-                            </button>
                         </div>
+                    </div>
+
+                    <!-- Consola / Tablero de Mandos del Director -->
+                    <div class="calibration-box">
+                        <div class="calibration-status">
+                            <span id="calib-text">OBTURADOR DESALINEADO</span>
+                            <span id="calib-percent">0% FPS</span>
+                        </div>
+                        <div class="progress-container">
+                            <div class="progress-bar" id="p-bar"></div>
+                        </div>
+                        <button class="btn-calibrate" id="btn-calc" onclick="calibrateClick()">
+                            Presionar para Calibrar FPS (Estabilizar)
+                        </button>
                     </div>
 
                     <!-- Reporte de Calibración Aprobado -->
                     <div class="set-report-panel" id="report-panel">
                         <div class="report-header">
                             <span></span>
-                            <h4>MÓDULO APROBADO: SET DE ALTA GAMA LISTO</h4>
+                            <h4>MÓDULO APROBADO: SET LISTO</h4>
                         </div>
                         <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.5;">
-                            El simulador de precisión visual ha validado tus parámetros con un <strong>98% de fidelidad cromática y de encuadre</strong>. Tu pasaporte y guion creativo de Ángulo90 han sido sellados.
+                            El simulador de precisión visual de <strong>A90X STUDIO</strong> ha validado tus parámetros con un <strong>98% de fidelidad cromática y de encuadre</strong>. Tu pasaporte y guion creativo han sido sellados.
                         </p>
                         <a href="#" id="wa-final-link" target="_blank" class="whatsapp-export-btn">
                             Exportar Guion y Parámetros a WhatsApp
@@ -999,29 +1248,29 @@
 
     <!-- SECCIÓN ENLACE NEURAL / CONTACTO -->
     <section id="enlace" class="contacto-section">
-        <div class="section-header">
+        <div class="section-header reveal">
             <h2>Enlace de Datos Neural</h2>
             <p>Conéctate directamente con nuestro equipo de producción en Mérida, Yucatán.</p>
         </div>
 
         <div class="contact-grid">
-            <div class="contact-card">
+            <div class="contact-card reveal delay-1">
                 <h5>Coordenadas del Set</h5>
                 <p>Calle 23 No. 47 entre 10 Y 12,<br>Residencial de Arco, Mérida, Yucatán</p>
             </div>
-            <div class="contact-card">
+            <div class="contact-card reveal delay-2">
                 <h5>Frecuencias de Audio</h5>
                 <p>Teléfono: 9999 30 71 47<br>WhatsApp: 999 740 5825</p>
             </div>
-            <div class="contact-card">
+            <div class="contact-card reveal delay-3">
                 <h5>Red Digital</h5>
-                <p>Correo: ventas@angulo90.com<br><a href="https://www.angulo90.com/_files/ugd/a12173_cfe4eee5bc8d4602aff901e248ea13b0.pdf" target="_blank" style="color:var(--accent-pink);">Descargar Aviso de Confidencialidad</a></p>
+                <p>Correo: ventas@angulo90.com<br><br><a href="https://www.angulo90.com/_files/ugd/a12173_cfe4eee5bc8d4602aff901e248ea13b0.pdf" target="_blank">Descargar Aviso de Confidencialidad</a></p>
             </div>
         </div>
     </section>
 
     <footer>
-        <p>© 2026 Ángulo90 Producciones Audiovisuales - Desarrollado bajo los más estrictos estándares de Alquimia Digital.</p>
+        <p>© 2026 A90X STUDIO Producciones Audiovisuales - Desarrollado bajo los más estrictos estándares de Alquimia Digital.</p>
     </footer>
 
     <script>
@@ -1041,11 +1290,36 @@
             setTimeout(type, typeSpeed);
         }());
 
+        // EFECTO DE REVELADO CON SCROLL (INTERSECTION OBSERVER)
+        document.addEventListener("DOMContentLoaded", function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                        // Dejar de observar una vez que se ha revelado
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px" // Dispara un poco antes de entrar por completo
+            });
+
+            revealElements.forEach(el => {
+                revealObserver.observe(el);
+            });
+        });
+
         // SINTETIZADOR DE AUDIO SCI-FI (WEB AUDIO API)
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSciFiBeep(freq = 800, duration = 0.1, type = 'sine') {
             try {
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
                 const osc = audioCtx.createOscillator();
                 const gainNode = audioCtx.createGain();
                 osc.type = type;
@@ -1061,15 +1335,6 @@
             }
         }
 
-        function playSuccessFanfare() {
-            const notes = [523.25, 659.25, 783.99, 1046.50]; // Acorde C mayor futurista
-            notes.forEach((freq, idx) => {
-                setTimeout(() => {
-                    playSciFiBeep(freq, 0.2, 'triangle');
-                }, idx * 120);
-            });
-        }
-
         // LÓGICA DEL SIMULADOR DE SET CINE-DIRECT AR
         let currentLighting = "noir";
         let isAnamorphic = true;
@@ -1081,10 +1346,9 @@
             const hudLens = document.getElementById('hud-lens');
             const hudLut = document.getElementById('hud-lut');
 
-            // Actualizar textos
-            hudLights.innerText = `LIGHTS: ${currentLighting.toUpperCase()} SYSTEM ACTIVE`;
-            hudLens.innerText = `LENS: ${isAnamorphic ? "ANAMORPHIC 35MM (2.39:1)" : "SPHERICAL 50MM (1.85:1)"}`;
-            hudLut.innerText = `LUT: ${currentLUT.toUpperCase()} GRADING ENGINE`;
+            hudLights.innerText = `SYS: ${currentLighting.toUpperCase()} ACTIVE`;
+            hudLens.innerText = `LENS: ${isAnamorphic ? "ANAMORPHIC 35MM" : "SPHERICAL 50MM"}`;
+            hudLut.innerText = `LUT: ${currentLUT.toUpperCase()}`;
         }
 
         function setLighting(style) {
@@ -1092,13 +1356,11 @@
             currentLighting = style;
             const sim = document.getElementById('light-sim');
             
-            // Cambiar botones activos
             document.querySelectorAll('#ctrl-lights .setup-btn').forEach(btn => {
                 btn.classList.remove('active');
                 if (btn.getAttribute('data-style') === style) btn.classList.add('active');
             });
 
-            // Cambiar colores en monitor simulando el set real
             if (style === 'noir') {
                 sim.style.background = 'radial-gradient(circle at 50% 30%, rgba(255, 0, 127, 0.25) 0%, rgba(0, 240, 255, 0.2) 50%, rgba(0,0,0,0.9) 100%)';
             } else if (style === 'lux') {
@@ -1153,11 +1415,10 @@
             updateHUD();
         }
 
-        // CALIBRACIÓN DE OBTURADOR DE CÁMARA (GAMIFICACIÓN)
+        // CALIBRACIÓN DE OBTURADOR DE CÁMARA
         function calibrateClick() {
             if (calibrationProgress >= 100) return;
 
-            // Incremento por cada clic
             calibrationProgress += 10;
             if (calibrationProgress > 100) calibrationProgress = 100;
 
@@ -1174,13 +1435,17 @@
             pText.style.color = "var(--primary-neon)";
 
             if (calibrationProgress === 100) {
-                playSuccessFanfare();
+                // Toca fanfarria de éxito
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    setTimeout(() => { playSciFiBeep(freq, 0.2, 'triangle'); }, idx * 120);
+                });
+
                 pText.innerText = "SEÑAL DE VÍDEO ESTABLE";
                 pText.style.color = "var(--led-green)";
-                hudSignal.innerText = "SIGNAL: ONLINE (98% COMPOSITION MATCH)";
+                hudSignal.innerText = "SIGNAL: ONLINE (98% MATCH)";
                 hudSignal.style.color = "var(--led-green)";
                 
-                // Mostrar reporte aprobado y preparar WhatsApp
                 document.getElementById('report-panel').style.display = 'block';
                 document.getElementById('btn-calc').style.display = 'none';
                 
@@ -1189,8 +1454,8 @@
         }
 
         function generarMensajeWhatsApp() {
-            const numeroWA = "529997405825"; // WhatsApp oficial de Ángulo90
-            const msg = `🎥 ¡Director de Set Ángulo90! He simulado un set en su Consola Interactiva y mi reporte ha sido Aprobado con Éxito (98% Precisión).%0A%0A`
+            const numeroWA = "529997405825";
+            const msg = `🎥 ¡Director de Set A90X STUDIO! He simulado mi set y mi reporte ha sido Aprobado con Éxito (98% Precisión).%0A%0A`
                       + `⚙️ *CONFIGURACIÓN DE MI SET:*%0A`
                       + `💡 *Iluminación:* ${currentLighting.toUpperCase()}%0A`
                       + `🎥 *Óptica:* ${isAnamorphic ? "Anamórfico 35mm (Widescreen)" : "Esférico 50mm"}%0A`
